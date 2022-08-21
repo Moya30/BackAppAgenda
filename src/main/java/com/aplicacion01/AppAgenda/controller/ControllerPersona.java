@@ -1,25 +1,28 @@
 package com.aplicacion01.AppAgenda.controller;
 
 import com.aplicacion01.AppAgenda.model.Persona;
-import com.aplicacion01.AppAgenda.repository.AgendaRepository;
+import com.aplicacion01.AppAgenda.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-
-import java.sql.ResultSet;
 import java.util.List;
 
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/api/personas")
+public class ControllerPersona {
+    @Autowired
+    private PersonaRepository personaRepository;
 
-public class ControllerPersona  {
+    @GetMapping
+    public List<Persona> getAllPersona() {
 
-  private AgendaRepository agendarepository;
+        return personaRepository.findAll();
+    }
 
-  public List<Persona> getAllPersons(){
-
-    return AgendaRepository.getAll();
-  }
-
-
+    @PostMapping
+    public Persona create(@RequestBody Persona person) {
+        return personaRepository.save(person);
+    }
 
 }

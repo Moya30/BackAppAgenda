@@ -5,15 +5,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Getter
 @Setter
 @Entity
-@Table(name="Contactos")
+@Table(name="contactos")
 
-public class Persona {
+public class Persona implements Serializable {
+    private  static final long serialVersionUID=1l;
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     @Column(name="name")
     private String name;
